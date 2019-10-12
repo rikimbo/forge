@@ -4,7 +4,6 @@ Date=1999-04-21
 Name=Classic Sixth Edition
 Code2=6E
 Type=Core
-Border=White
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported

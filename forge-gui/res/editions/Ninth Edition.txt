@@ -4,7 +4,6 @@ Date=2005-07-29
 Name=Ninth Edition
 Code2=9E
 Type=Core
-Border=White
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 FatPack=6
