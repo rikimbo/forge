@@ -301,7 +301,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         hoveredPanel = null;
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
-        remove(fromPanel);
+        fromPanel.getParent().remove(fromPanel);
+        //remove(fromPanel);
         if (repaint) {
             invalidate();
             repaint();
