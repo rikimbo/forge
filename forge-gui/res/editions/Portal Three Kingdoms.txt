@@ -5,7 +5,6 @@ Name=Portal: Three Kingdoms
 Code2=P3
 MciCode=p3k
 Type=Starter
-Border=White
 BoosterCovers=1
 Booster=5 Common, 2 Uncommon, 1 Rare, 2 BasicLand
 Foil=NotSupported
