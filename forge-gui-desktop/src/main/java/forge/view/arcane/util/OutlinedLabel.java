@@ -17,6 +17,9 @@
  */
 package forge.view.arcane.util;
 
+import javax.imageio.ImageIO;
+import forge.properties.ForgeConstants;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,6 +30,9 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.BreakIterator;
@@ -45,11 +51,69 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id: OutlinedLabel.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class OutlinedLabel extends JLabel {
+    private static BufferedImage wpt;
+    private static BufferedImage upt;
+    private static BufferedImage bpt;
+    private static BufferedImage rpt;
+    private static BufferedImage gpt;
+    private static BufferedImage mpt;
+    private static BufferedImage cpt;
+    private static BufferedImage apt;
+    private static BufferedImage loyalty;
+    private static boolean imagesLoaded = false;
+
+
+    private static void LoadPTImages(){
+        imagesLoaded = true;
+        
+        try{
+            wpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/wpt.png"));
+            upt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/upt.png"));
+            bpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/bpt.png"));
+            rpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/rpt.png"));
+            gpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/gpt.png"));
+            mpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/mpt.png"));
+            cpt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/cpt.png"));
+            apt = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/apt.png"));
+            loyalty = ImageIO.read(new File(ForgeConstants.RES_DIR + "defaults/pts/loyalty.png"));
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Instantiates a new glow text.
      */
     public OutlinedLabel() {
+        this(null);
+    }
+
+    public OutlinedLabel(String ptType) {
+        if(!imagesLoaded)
+            LoadPTImages();
+        
+        ptImage = null;
+        if(ptType != null){
+            if(ptType.equalsIgnoreCase("wpt"))
+                ptImage = wpt;
+            if(ptType.equalsIgnoreCase("upt"))
+                ptImage = upt;
+            if(ptType.equalsIgnoreCase("bpt"))
+                ptImage = bpt;
+            if(ptType.equalsIgnoreCase("rpt"))
+                ptImage = rpt;
+            if(ptType.equalsIgnoreCase("gpt"))
+                ptImage = gpt;
+            if(ptType.equalsIgnoreCase("mpt"))
+                ptImage = mpt;
+            if(ptType.equalsIgnoreCase("cpt"))
+                ptImage = cpt;
+            if(ptType.equalsIgnoreCase("apt"))
+                ptImage = apt;
+            if(ptType.equalsIgnoreCase("loyalty"))
+                ptImage = loyalty;
+        }
     }
 
     /** Constant <code>serialVersionUID=-2868833097364223352L</code>. */
@@ -58,6 +122,8 @@ public class OutlinedLabel extends JLabel {
     private final static int outlineSize = 1; 
     private boolean wrap;
 
+    private BufferedImage ptImage;
+    
     /**
      * <p>
      * setGlow.
@@ -120,6 +186,12 @@ public class OutlinedLabel extends JLabel {
 //            g.setColor(Color.cyan);
 //            g.drawRect(0, 0, size.width-1, size.height-1);
 //        }
+
+        //g.setColor(Color.black);
+        //g.fillRect(0, 0, size.width-1, size.height-1);
+        
+        if(ptImage != null)
+            g.drawImage(ptImage, 0, 0, size.width, size.height, null);
         
         Graphics2D g2d = (Graphics2D) g;
         
@@ -127,6 +199,11 @@ public class OutlinedLabel extends JLabel {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         int textX = outlineSize, textY = 0;
+        if(ptImage != null){
+            textX = size.width / 2 - (int) (0.8 * this.getPreferredSize().width) / 2;
+            textY = size.height / 2 - this.getPreferredSize().height / 2;
+        }
+        
         int wrapWidth = Math.max(0, wrap ? size.width - outlineSize * 2 : Integer.MAX_VALUE);
 
         final String text = getText();
