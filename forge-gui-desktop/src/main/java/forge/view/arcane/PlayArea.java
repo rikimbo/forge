@@ -358,7 +358,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     final CardPanel panel = stack.get(panelIndex);
                     final int stackPosition = panelCount - panelIndex - 1;
-                    this.setComponentZOrder(panel, panelIndex);
+                    if(panel.getParent() != null)
+                        this.setComponentZOrder(panel, panelIndex);
                     final int panelX = x + (stackPosition * this.stackSpacingX);
                     final int panelY = y + (stackPosition * this.stackSpacingY);
                     //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")");
@@ -685,7 +686,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (card.hasAnyCardAttachments()) {
             final Iterable<CardView> enchants = card.getAllAttachedCards();
             for (final CardView e : enchants) {
-                final CardPanel cardE = getCardPanel(e.getId());
+                final CardPanel cardE = this.getMatchUI().getFieldViewFor(e.getController()).getTabletop().getCardPanel(e.getId());
                 if (cardE != null) {
                     if (cardE.getAttachedToPanel() != toPanel) {
                         cardE.setAttachedToPanel(toPanel);
@@ -698,7 +699,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
-            attachedToPanel = getCardPanel(card.getAttachedTo().getId());
+            attachedToPanel = this.getMatchUI().getFieldViewFor(card.getAttachedTo().getController()).getTabletop().getCardPanel(card.getAttachedTo().getId());
         } else {
             attachedToPanel = null;
         }
@@ -854,11 +855,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         private void addAttachedPanels(final CardPanel panel) {
-            for (final CardPanel attachedPanel : panel.getAttachedPanels()) {
-                if (panel.getCard() != null && super.add(attachedPanel)) {
-                    addAttachedPanels(attachedPanel);
+            if( panel.getAttachedPanels() != null )
+                for (final CardPanel attachedPanel : panel.getAttachedPanels()) {
+                    if (panel.getCard() != null && super.add(attachedPanel)) {
+                        addAttachedPanels(attachedPanel);
+                    }
                 }
-            }
         }
 
         private int getWidth() {
