@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Pedro 1
+Title=Pedro
+Difficulty=easy
+Description=BR self-inflicting damage and life loss deck with Death's Shadow and creatures with Dethrone
+Icon=Pedro.jpg
+Deck Type=constructed
+[Main]
+1 Aftershock
+1 Ambition's Cost
+1 Ancient Tomb
+1 Barbarian Ring
+2 Blood Crypt
+1 Cabal Pit
+4 Death's Shadow
+1 Devour in Shadow
+1 Fireslinger
+1 Flame Rift
+1 Forge Devil
+1 Greed
+3 Grenzo's Cutthroat
+1 Heartless Hidetsugu
+1 Illicit Auction
+1 Juzam Djinn
+1 Kezzerdrix
+2 Lava Hounds
+1 Menacing Ogre
+5 Mountain
+2 Necrogen Scudder
+1 Orcish Artillery
+1 Pain Seer
+2 Pulse of the Forge
+1 Rain of Daggers
+1 Reckless Spite
+1 Scourge of the Throne
+2 Sulfurous Springs
+10 Swamp
+2 Tainted Peak
+1 Treasonous Ogre
+1 Vampiric Spirit
+2 Vendetta
+2 Wretched Anurid
+[sideboard]

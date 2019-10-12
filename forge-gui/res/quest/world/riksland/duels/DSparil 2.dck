@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=D'Sparil 2
+Title=D'Sparil
+Difficulty=medium
+Description=RU Madness deck with draw and discard
+Icon=dsparil.jpg
+Deck Type=constructed
+[Main]
+3 Chasm Skulker
+2 Deep Analysis
+2 Desperate Ravings
+1 Dragon Mage
+4 Fiery Temper
+8 Island
+2 Jeskai Elder
+1 Jhessian Thief
+1 Lightning Surge
+9 Mountain
+1 Murder of Crows
+1 Niv-Mizzet, the Firemind
+3 Obsessive Search
+1 Psychosis Crawler
+3 Reckless Wurm
+2 Remand
+1 Scalding Tarn
+1 Spellbound Dragon
+2 Steam Vents
+4 Sulfur Falls
+1 Taniwha
+3 Teferi's Imp
+1 Tibalt, the Fiend-Blooded
+2 Violent Eruption
+1 Wheel of Fate
+[sideboard]
