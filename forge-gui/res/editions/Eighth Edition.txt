@@ -4,7 +4,6 @@ Date=2003-07-28
 Name=Eighth Edition
 Code2=8E
 Type=Core
-Border=White
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 FoilAlwaysInCommonSlot=False

@@ -4,7 +4,6 @@ Date=1997-03-24
 Name=Fifth Edition
 Code2=5E
 Type=Core
-Border=White
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
