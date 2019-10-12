@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Corvus 1
+Title=Corvus
+Difficulty=easy
+Description=RW deck with prowess and raid creatures
+Icon=corvus.jpg
+Deck Type=constructed
+[Main]
+1 Abbot of Keral Keep
+2 Ajani's Mantra
+3 Boros Guildgate
+1 Breath of Life
+1 Desperate Stand
+1 Dragon-Style Twins
+1 Faith's Fetters
+1 Fissure
+1 Imperial Recruiter
+1 Lightning Helix
+2 Mage-Ring Bully
+2 Mardu Heart-Piercer
+1 Marshaling Cry
+2 Monastery Mentor
+1 Monastery Swiftspear
+8 Mountain
+1 Ojutai Exemplars
+1 Opal Caryatid
+1 Opal Gargoyle
+1 Opal Titan
+1 Path of Bravery
+8 Plains
+1 Scorching Missile
+1 Searing Flesh
+2 Searing Meditation
+2 Seeker of the Way
+1 Soltari Champion
+2 Soltari Foot Soldier
+1 Strongarm Monk
+2 Temple of Triumph
+1 Terashi's Grasp
+1 Warleader's Helix
+3 Wind-Scarred Crag
+1 Wingmate Roc
+[sideboard]

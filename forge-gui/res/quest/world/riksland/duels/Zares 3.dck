@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Zares 3
+Title=Zares
+Difficulty=hard
+Description=BR deck that punishes the player for having cards in hand
+Icon=zares.jpg
+Deck Type=constructed
+[Main]
+4 Badlands
+2 Black Vise
+2 Blood Crypt
+4 Bloodstained Mire
+2 Burning Inquiry
+4 Dragonskull Summit
+1 Ebony Owl Netsuke
+4 Fate Unraveler
+4 Howling Mine
+4 Kederekt Parasite
+2 Master of the Feast
+4 Mountain
+1 Mox Jet
+1 Mox Ruby
+3 Robber Fly
+2 Runeflare Trap
+1 Seizan, Perverter of Truth
+3 Shah of Naar Isle
+2 Shocker
+2 Spiteful Visions
+1 Stormbreath Dragon
+2 Sudden Impact
+4 Swamp
+1 Tibalt, the Fiend-Blooded
+[sideboard]
