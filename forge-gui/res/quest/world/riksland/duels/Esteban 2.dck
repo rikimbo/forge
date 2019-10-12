@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Esteban 2
+Title=Esteban
+Difficulty=medium
+Description=WU vigilance deck with Meekstone and Savor the Moment
+Icon=Esteban.jpg
+Deck Type=constructed
+[Main]
+1 Akroma, Angel of Wrath
+1 Brimaz, King of Oreskos
+2 Courier Hawk
+2 Flooded Strand
+2 Frost Breath
+4 Glacial Fortress
+2 Hallowed Fountain
+1 Hundred-Handed One
+2 Hussar Patrol
+1 Infinite Hourglass
+8 Island
+1 Jhovall Queen
+4 Meekstone
+2 Mystic Penitent
+8 Plains
+4 Savor the Moment
+1 Serra Angel
+1 Serra Avenger
+2 Serra Sphinx
+1 Sleep
+1 Stasis
+1 Sun Titan
+1 Tamiyo, the Moon Sage
+3 Tempest Drake
+2 Thraben Valiant
+2 Vulshok Gauntlets
+[sideboard]

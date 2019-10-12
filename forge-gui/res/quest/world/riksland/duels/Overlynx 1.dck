@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Overlynx 1
+Title=Overlynx
+Difficulty=easy
+Description=Gu land recursion deck with Titania, Protector of Argoth
+Icon=overlynx.jpg
+Deck Type=constructed
+[Main]
+1 Cartographer
+1 Constant Mists
+1 Courser of Kruphix
+2 Crucible of Worlds
+2 Dreamscape Artist
+2 Fallow Wurm
+15 Forest
+1 Gods' Eye, Gate to the Reikai
+2 Groundskeeper
+2 Harrow
+3 Harvest Wurm
+1 Hedron Crab
+10 Island
+2 Jokulmorder
+1 Mana Vortex
+1 Oracle of Mul Daya
+2 Psychic Vortex
+2 Restore
+2 Rushing River
+2 Scythe Tiger
+2 Serendib Djinn
+2 Titania, Protector of Argoth
+1 Vinelasher Kudzu
+[sideboard]
