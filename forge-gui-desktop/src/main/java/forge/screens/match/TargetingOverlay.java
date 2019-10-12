@@ -439,6 +439,7 @@ public class TargetingOverlay {
         final Iterable<CardView> attachedCards = c.getAttachedCards();
         final CardView paired = c.getPairedWith();
 
+        /*
         if (null != attachedTo) {
             if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
                 addArc(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
@@ -453,6 +454,7 @@ public class TargetingOverlay {
                 }
             }
         }
+        */
         if (null != paired) {
             addArc(endpoints.get(paired.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
             cardsVisualized.add(paired);
