@@ -6,7 +6,6 @@ Code2=UL
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
-Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=ULG
 
