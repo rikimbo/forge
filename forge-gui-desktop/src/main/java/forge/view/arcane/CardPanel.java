@@ -48,8 +48,60 @@ import javax.swing.SwingUtilities;
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package forge.view.arcane;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.font.TextAttribute;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
+import forge.CachedCardImage;
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardStateName;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -148,6 +200,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     public CardPanel(final CMatchUI matchUI, final CardView card0) {
         this.matchUI = matchUI;
 
+        this.card = card0;
+        
         setBackground(Color.black);
         setOpaque(false);
 
@@ -189,10 +243,79 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void createPTOverlay() {
         // Power/Toughness
-        ptText = new OutlinedLabel();
-        ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
-        ptText.setForeground(Color.white);
-        ptText.setGlow(Color.black);
+        String ptType = "cpt";
+        boolean isWalker = false;
+        boolean isArtifact = false;
+        ColorSet colors = this.card.getState(false).getColors();
+        
+        if( this.card.getState(false).getType() != null )
+        {
+            for(String type : this.card.getState(false).getType()){
+                if(type.equalsIgnoreCase("planeswalker"))
+                    isWalker = true;
+                if(type.equalsIgnoreCase("artifact"))
+                    isArtifact = true;
+            }
+        }
+        
+        if(isWalker){
+            ptType = "loyalty";
+        }
+        else{
+            if(colors.isColorless()){
+                if(isArtifact)
+                    ptType = "apt";
+                else
+                    ptType = "cpt";
+            }
+            else{
+                if(colors.isMulticolor()){
+                    boolean isHybrid = true;
+                    if(colors.countColors() > 2){
+                        isHybrid = false;
+                    }
+                    else{
+                        for(ManaCostShard shard : card.getState(false).getManaCost()){
+                            if(shard.isMonoColor())
+                            {
+                                isHybrid = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if(isHybrid)
+                        ptType = "cpt";
+                    else
+                        ptType = "mpt";
+                }
+                else{
+                    if(colors.hasWhite())
+                        ptType = "wpt";
+                    if(colors.hasBlue())
+                        ptType = "upt";
+                    if(colors.hasBlack())
+                        ptType = "bpt";
+                    if(colors.hasRed())
+                        ptType = "rpt";
+                    if(colors.hasGreen())
+                        ptType = "gpt";
+                }
+            }
+        }
+        
+        this.ptText = new OutlinedLabel(ptType);
+        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        //this.ptText.setForeground(Color.white);
+        
+        if(isWalker){
+            this.ptText.setForeground(Color.white);
+            this.ptText.setGlow(Color.black);
+        }
+        else{
+            this.ptText.setForeground(Color.black);
+            this.ptText.setGlow(Color.white);
+        }
         add(ptText);
 
         // Damage
@@ -468,13 +591,53 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void displayPTOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
+            boolean onBattlefield = this.card.getZone() != null && ZoneType.Battlefield.equals(this.card.getZone());
+            boolean isWalker = false;
+            for(String type : this.card.getState(false).getType()){
+                if(type.equalsIgnoreCase("planeswalker"))
+                    isWalker = true;
+            }
+        
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
-            final Dimension ptSize = ptText.getPreferredSize();
+            //final Dimension ptSize = this.ptText.getPreferredSize();
+            Dimension ptSize;
+            Dimension originalSize = null;
+            
+            if(isWalker){
+                ptSize = new Dimension((int) (0.18 * imgSize.width), (int) (0.081 * imgSize.height));
+            }
+            else{
+                ptSize = new Dimension((int) (0.23 * imgSize.width), (int) (0.088 * imgSize.height));
+            }
+            
+            if(onBattlefield && ptSize.height < 32){
+                originalSize = ptSize;
+                ptSize = new Dimension((int) (originalSize.width * 32f / originalSize.height), 32);
+            }
+            
             ptText.setSize(ptSize.width, ptSize.height);
-            final int ptX = rightLine - ptSize.width/2;
-            final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            //final int ptX = rightLine - ptSize.width/2;
+            //final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            
+            int ptX, ptY;
+            
+            if(isWalker){
+                ptX = (int)(0.82 * imgSize.width);
+                ptY = (int)(0.904 * imgSize.height);
+            }
+            else{
+                ptX = (int)(0.74 * imgSize.width);
+                ptY = (int)(0.895 * imgSize.height);
+            }
+            
+            if(originalSize != null){
+                ptX -= (int) (0.86f * (ptSize.width - originalSize.width));
+                ptY -= (int) (0.78f * (ptSize.height - originalSize.height));
+            }
             ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            
+            this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 0.6f * ptSize.height ));
             // Toughness
             final Dimension dmgSize = damageText.getPreferredSize();
             damageText.setSize(dmgSize.width, dmgSize.height);
