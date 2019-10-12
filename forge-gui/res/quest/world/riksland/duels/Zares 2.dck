@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Zares 2
+Title=Zares
+Difficulty=medium
+Description=BR deck that punishes the player for having cards in hand
+Icon=zares.jpg
+Deck Type=constructed
+[Main]
+1 Adamaro, First to Desire
+1 Bituminous Blast
+1 Black Vise
+2 Blood Crypt
+2 Bloodstained Mire
+2 Burning Inquiry
+4 Dragonskull Summit
+1 Ebony Owl Netsuke
+3 Fate Unraveler
+3 Howling Mine
+3 Kederekt Parasite
+2 Master of the Feast
+8 Mountain
+2 Robber Fly
+2 Runeflare Trap
+1 Seizan, Perverter of Truth
+3 Shah of Naar Isle
+2 Shocker
+2 Spiteful Visions
+1 Stormbreath Dragon
+2 Sudden Impact
+7 Swamp
+1 Temple of Malice
+1 Tibalt, the Fiend-Blooded
+2 Viseling
+1 Wheel of Fortune
+[sideboard]

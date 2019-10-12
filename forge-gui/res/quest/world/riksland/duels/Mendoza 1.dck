@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mendoza 1
+Title=Mendoza
+Difficulty=easy
+Description=GU heroic deck with pump spells
+Icon=Mendoza.jpg
+Deck Type=constructed
+[Main]
+4 Battlefield Thaumaturge
+1 Cackling Counterpart
+1 Centaur Battlemaster
+2 Diligent Farmhand
+1 Distortion Strike
+1 Enlarge
+2 Evolving Wilds
+9 Forest
+1 Hero of Leina Tower
+2 Hunt the Weak
+1 Incremental Growth
+9 Island
+1 Leap
+2 Livewire Lash
+1 Might of Oaks
+4 Muscle Burst
+1 Predator's Rapport
+1 Setessan Oathsworn
+1 Shardless Agent
+2 Skyshroud Forest
+2 Staunch-Hearted Warrior
+1 Sylvan Might
+2 Symbiosis
+2 Triton Fortune Hunter
+1 Trygon Predator
+1 War-Wing Siren
+2 Wavecrash Triton
+2 Yavimaya Coast
+[sideboard]

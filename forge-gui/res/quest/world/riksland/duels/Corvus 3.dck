@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Corvus 3
+Title=Corvus
+Difficulty=hard
+Description=RW deck with prowess and raid creatures
+Icon=corvus.jpg
+Deck Type=constructed
+[Main]
+2 Abbot of Keral Keep
+2 Ajani's Mantra
+4 Clifftop Retreat
+1 Desperate Stand
+1 Dragon-Style Twins
+2 Exquisite Firecraft
+1 Faith's Fetters
+1 Five-Alarm Fire
+1 Glory of Warfare
+3 Lightning Helix
+2 Mardu Heart-Piercer
+3 Monastery Mentor
+3 Monastery Swiftspear
+6 Mountain
+1 Mox Pearl
+1 Mox Ruby
+2 Ojutai Exemplars
+1 Opal Titan
+1 Path of Bravery
+6 Plains
+4 Plateau
+2 Searing Meditation
+2 Seeker of the Way
+1 Soltari Champion
+1 Soltari Foot Soldier
+1 Terashi's Grasp
+1 Timely Hordemate
+2 Wind-Scarred Crag
+2 Wingmate Roc
+[sideboard]
