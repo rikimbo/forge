@@ -4,7 +4,6 @@ MciCode=at
 Date=1998-11-01
 Name=Anthologies
 Type=Boxed_Set
-Border=White
 Foil=NotSupported
 ScryfallCode=ATH
 

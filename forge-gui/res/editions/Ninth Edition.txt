@@ -5,7 +5,6 @@ Name=Ninth Edition
 Code2=9E
 MciCode=9e
 Type=Core
-Border=White
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 FatPack=6
