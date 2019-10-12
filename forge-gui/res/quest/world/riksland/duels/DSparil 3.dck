@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=D'Sparil 3
+Title=D'Sparil
+Difficulty=hard
+Description=RU Madness deck with draw and discard
+Icon=dsparil.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Recall
+2 Avaricious Dragon
+1 Browbeat
+4 Chasm Skulker
+2 Deep Analysis
+2 Desperate Ravings
+4 Fiery Temper
+6 Island
+1 Jhessian Thief
+7 Mountain
+1 Mox Ruby
+1 Mox Sapphire
+1 Niv-Mizzet, the Firemind
+3 Obsessive Search
+1 Psychosis Crawler
+3 Reckless Wurm
+4 Remand
+3 Scalding Tarn
+1 Spellbound Dragon
+2 Sulfur Falls
+2 Teferi's Imp
+1 Tibalt, the Fiend-Blooded
+2 Violent Eruption
+4 Volcanic Island
+1 Wheel of Fortune
+[sideboard]

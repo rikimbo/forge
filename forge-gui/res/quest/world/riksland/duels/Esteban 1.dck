@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Esteban 1
+Title=Esteban
+Difficulty=easy
+Description=WU vigilance deck with Meekstone and Savor the Moment
+Icon=Esteban.jpg
+Deck Type=constructed
+[Main]
+1 Archangel
+1 Armored Griffin
+2 Courier Hawk
+1 Court Hussar
+2 Flood Plain
+2 Frost Breath
+2 Glacial Fortress
+1 Herald of Serra
+1 Hundred-Handed One
+2 Hussar Patrol
+1 Infinite Hourglass
+10 Island
+1 Jelenn Sphinx
+1 Jhovall Queen
+1 Marble Titan
+4 Meekstone
+2 Mystic Penitent
+1 Noble Templar
+10 Plains
+4 Savor the Moment
+1 Serra Angel
+1 Serra Sphinx
+1 Sleep
+3 Tempest Drake
+2 Thraben Valiant
+2 Vulshok Gauntlets
+[sideboard]

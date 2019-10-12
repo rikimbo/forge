@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sancho 2
+Title=Sancho
+Difficulty=medium
+Description=RG damage-to-all deck with Mogg Maniac and Saber Ants
+Icon=Sancho.jpg
+Deck Type=constructed
+[Main]
+1 Blasphemous Act
+2 Bloodfire Dwarf
+1 Breath of Darigaaz
+2 Broodhatch Nantuko
+1 Crater Hellion
+1 Deep-Slumber Titan
+1 Earthquake
+8 Forest
+2 Goblin Arsonist
+2 Gruul Keyrune
+1 Hull Breach
+2 Inferno
+1 Magma Phoenix
+3 Mogg Maniac
+1 Mortal Wound
+8 Mountain
+2 Mudbutton Torchrunner
+2 Pyroclasm
+1 Rolling Earthquake
+4 Rootbound Crag
+3 Saber Ants
+1 Savage Twister
+1 Scalding Salamander
+2 Stomping Ground
+1 Stuffy Doll
+1 Vigor
+2 Volatile Rig
+1 Vulshok Refugee
+2 Wooded Foothills
+[sideboard]

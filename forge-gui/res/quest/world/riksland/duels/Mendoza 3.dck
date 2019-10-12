@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mendoza 3
+Title=Mendoza
+Difficulty=hard
+Description=GU heroic deck with pump spells
+Icon=Mendoza.jpg
+Deck Type=constructed
+[Main]
+4 Battlefield Thaumaturge
+1 Cackling Counterpart
+2 Distortion Strike
+1 Enlarge
+7 Forest
+2 Hero of Leina Tower
+1 Incremental Growth
+7 Island
+1 Jhessian Infiltrator
+1 Leap
+1 Leeching Bite
+2 Livewire Lash
+4 Misty Rainforest
+1 Mox Emerald
+1 Mox Sapphire
+2 Prey Upon
+2 Rancor
+1 Riding the Dilu Horse
+1 Setessan Oathsworn
+2 Shardless Agent
+2 Staunch-Hearted Warrior
+1 Stonewood Invocation
+1 Sylvan Might
+2 Symbiosis
+3 Triton Fortune Hunter
+4 Tropical Island
+1 Trygon Predator
+2 War-Wing Siren
+[sideboard]
