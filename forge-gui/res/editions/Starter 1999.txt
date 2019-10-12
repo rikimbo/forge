@@ -2,10 +2,8 @@
 Code=S99
 Date=1999-07-01
 Name=Starter 1999
-Border=White
 Code2=ST
 Type=Starter
-Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 Booster=9 Common, 3 Uncommon, 1 Rare, 2 BasicLand
 ScryfallCode=S99

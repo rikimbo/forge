@@ -4,7 +4,6 @@ Date=1995-04-01
 Name=Fourth Edition
 Code2=4E
 Type=Core
-Border=White
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
