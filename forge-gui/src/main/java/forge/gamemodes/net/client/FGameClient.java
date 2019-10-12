@@ -91,7 +91,7 @@ public class FGameClient implements IToServer {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Client sent " + event);
+        //System.out.println("Client sent " + event);
         channel.writeAndFlush(event);
     }
 
