@@ -80,6 +80,9 @@ public class PhaseIndicator extends JPanel {
 
     //========== Custom class handling
     public PhaseLabel getLabelFor(final PhaseType s) {
+        if(s == null)
+            return null;
+    
         switch (s) {
             case UPKEEP:
                 return this.getLblUpkeep();
