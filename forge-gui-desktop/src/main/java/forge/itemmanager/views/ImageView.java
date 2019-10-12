@@ -1134,7 +1134,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (item instanceof IPaperCard) {
                 CardView cv = CardView.getCardForUi((IPaperCard) item);
                 // Amonkhet Invocations
-                noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+                // noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
                 // Unstable basic lands
                 noBorder |= cv.getCurrentState().isBasicLand() && cv.getCurrentState().getSetCode().equalsIgnoreCase("UST");
             }
