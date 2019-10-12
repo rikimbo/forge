@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=D'Sparil 1
+Title=D'Sparil
+Difficulty=easy
+Description=RU Madness deck with draw and discard
+Icon=dsparil.jpg
+Deck Type=constructed
+[Main]
+1 Avaricious Dragon
+2 Cephalid Sage
+2 Chasm Skulker
+2 Deep Analysis
+2 Desperate Ravings
+1 Dragon Mage
+4 Fiery Temper
+8 Island
+1 Jhessian Thief
+1 Lightning Surge
+2 Merfolk Looter
+9 Mountain
+1 Murder of Crows
+3 Obsessive Search
+1 Psychosis Crawler
+2 Reckless Wurm
+1 Remand
+1 Sphinx's Tutelage
+2 Sulfur Falls
+3 Swiftwater Cliffs
+1 Taniwha
+3 Teferi's Imp
+2 Temple of Epiphany
+1 Tibalt, the Fiend-Blooded
+1 Vexing Sphinx
+2 Violent Eruption
+1 Wheel of Fate
+[sideboard]
