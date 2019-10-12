@@ -423,6 +423,9 @@ public class QuestWinLoseController {
         String typeWon;
         boolean addDraftToken = false;
 
+        if( (qData.getAchievements().getWinStreakCurrent() + 1) % 3 == 0 )
+            addDraftToken = true;
+        
         switch (currentStreak) {
         case 3:
             cardsWon.addAll(qData.getCards().addRandomCards(1, PaperCardPredicates.IS_COMMON));
