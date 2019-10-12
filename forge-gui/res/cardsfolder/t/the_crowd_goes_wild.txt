@@ -1,0 +1,10 @@
+Name:The Crowd Goes Wild
+ManaCost:X G
+Types:Sorcery
+A:SP$ PutCounter | Cost$ X G | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SubAbility$ DBPumpAll | SpellDescription$ Support X. (Put a +1/+1 counter on each of up to X target creatures.) Each creature with a +1/+1 counter on it gains trample until end of turn.
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$Valid Creature
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.counters_GE1_P1P1 | KW$ Trample
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_crowd_goes_wild.jpg
+Oracle:Assist (Another player can pay up to {X} of this spell’s cost. You choose the value of X.) Support X. (Put a +1/+1 counter on each of up to X target creatures.) Each creature with a +1/+1 counter on it gains trample until end of turn.
+

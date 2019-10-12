@@ -1,0 +1,6 @@
+Name:Play of the Game
+ManaCost:6 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 6 W W | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all nonland permanents.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/play_of_the_game.jpg
+Oracle:Assist (Another player can pay up to {6} of this spell’s cost.)\nExile all nonland permanents.
