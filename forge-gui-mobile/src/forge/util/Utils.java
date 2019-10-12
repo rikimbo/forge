@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Utils {
-    public static final float BASE_WIDTH = 320f;
-    public static final float BASE_HEIGHT = 480f;
+    public static final float BASE_WIDTH = 640f;
+    public static final float BASE_HEIGHT = 1024f;
     private static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
     private static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
     private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
