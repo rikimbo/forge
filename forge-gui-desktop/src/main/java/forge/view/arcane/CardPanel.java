@@ -47,7 +47,9 @@ import javax.swing.SwingUtilities;
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -144,6 +146,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     public CardPanel(final CMatchUI matchUI, final CardView card0) {
         this.matchUI = matchUI;
 
+        this.card = card0;
+        
         setBackground(Color.black);
         setOpaque(false);
 
@@ -185,10 +189,79 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void createPTOverlay() {
         // Power/Toughness
-        ptText = new OutlinedLabel();
-        ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
-        ptText.setForeground(Color.white);
-        ptText.setGlow(Color.black);
+        String ptType = "cpt";
+        boolean isWalker = false;
+        boolean isArtifact = false;
+        ColorSet colors = this.card.getState(false).getColors();
+        
+        if( this.card.getState(false).getType() != null )
+        {
+            for(String type : this.card.getState(false).getType()){
+                if(type.equalsIgnoreCase("planeswalker"))
+                    isWalker = true;
+                if(type.equalsIgnoreCase("artifact"))
+                    isArtifact = true;
+            }
+        }
+        
+        if(isWalker){
+            ptType = "loyalty";
+        }
+        else{
+            if(colors.isColorless()){
+                if(isArtifact)
+                    ptType = "apt";
+                else
+                    ptType = "cpt";
+            }
+            else{
+                if(colors.isMulticolor()){
+                    boolean isHybrid = true;
+                    if(colors.countColors() > 2){
+                        isHybrid = false;
+                    }
+                    else{
+                        for(ManaCostShard shard : card.getState(false).getManaCost()){
+                            if(shard.isMonoColor())
+                            {
+                                isHybrid = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if(isHybrid)
+                        ptType = "cpt";
+                    else
+                        ptType = "mpt";
+                }
+                else{
+                    if(colors.hasWhite())
+                        ptType = "wpt";
+                    if(colors.hasBlue())
+                        ptType = "upt";
+                    if(colors.hasBlack())
+                        ptType = "bpt";
+                    if(colors.hasRed())
+                        ptType = "rpt";
+                    if(colors.hasGreen())
+                        ptType = "gpt";
+                }
+            }
+        }
+        
+        this.ptText = new OutlinedLabel(ptType);
+        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        //this.ptText.setForeground(Color.white);
+        
+        if(isWalker){
+            this.ptText.setForeground(Color.white);
+            this.ptText.setGlow(Color.black);
+        }
+        else{
+            this.ptText.setForeground(Color.black);
+            this.ptText.setGlow(Color.white);
+        }
         add(ptText);
 
         // Damage
@@ -448,13 +521,53 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void displayPTOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
+            boolean onBattlefield = this.card.getZone() != null && ZoneType.Battlefield.equals(this.card.getZone());
+            boolean isWalker = false;
+            for(String type : this.card.getState(false).getType()){
+                if(type.equalsIgnoreCase("planeswalker"))
+                    isWalker = true;
+            }
+        
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
-            final Dimension ptSize = ptText.getPreferredSize();
+            //final Dimension ptSize = this.ptText.getPreferredSize();
+            Dimension ptSize;
+            Dimension originalSize = null;
+            
+            if(isWalker){
+                ptSize = new Dimension((int) (0.18 * imgSize.width), (int) (0.081 * imgSize.height));
+            }
+            else{
+                ptSize = new Dimension((int) (0.23 * imgSize.width), (int) (0.088 * imgSize.height));
+            }
+            
+            if(onBattlefield && ptSize.height < 32){
+                originalSize = ptSize;
+                ptSize = new Dimension((int) (originalSize.width * 32f / originalSize.height), 32);
+            }
+            
             ptText.setSize(ptSize.width, ptSize.height);
-            final int ptX = rightLine - ptSize.width/2;
-            final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            //final int ptX = rightLine - ptSize.width/2;
+            //final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            
+            int ptX, ptY;
+            
+            if(isWalker){
+                ptX = (int)(0.82 * imgSize.width);
+                ptY = (int)(0.904 * imgSize.height);
+            }
+            else{
+                ptX = (int)(0.74 * imgSize.width);
+                ptY = (int)(0.895 * imgSize.height);
+            }
+            
+            if(originalSize != null){
+                ptX -= (int) (0.86f * (ptSize.width - originalSize.width));
+                ptY -= (int) (0.78f * (ptSize.height - originalSize.height));
+            }
             ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            
+            this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 0.6f * ptSize.height ));
             // Toughness
             final Dimension dmgSize = damageText.getPreferredSize();
             damageText.setSize(dmgSize.width, dmgSize.height);
