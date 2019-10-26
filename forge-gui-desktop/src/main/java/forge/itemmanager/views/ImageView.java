@@ -1137,6 +1137,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 // noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
                 // Unstable basic lands
                 noBorder |= cv.getCurrentState().isBasicLand() && cv.getCurrentState().getSetCode().equalsIgnoreCase("UST");
+				// Masterpiece editions
+				noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_GRN");
+				noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_RNA");
+				noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_WAR");
             }
 
             final int borderSize = noBorder? 0 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
