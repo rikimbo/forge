@@ -109,6 +109,9 @@ public class FightAi extends SpellAbilityAi {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return true; // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
+        if ("Never".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
 
         return checkApiLogic(aiPlayer, sa);
     }
