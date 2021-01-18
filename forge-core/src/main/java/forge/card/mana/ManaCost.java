@@ -18,6 +18,7 @@
 package forge.card.mana;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,7 @@ import com.google.common.collect.Lists;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard>, Serializable, Cloneable {
+public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard>, Collection<ManaCostShard>, Serializable, Cloneable {
     private static final long serialVersionUID = -2477430496624149226L;
 
     private static final char DELIM = (char)6;
@@ -388,10 +389,46 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     }
 
     @Override
+    public int size() { return this.shards.size(); }
+
+    @Override
+    public boolean isEmpty() { return this.shards.isEmpty(); }
+
+    @Override
+    public boolean contains(Object o) { return this.shards.contains(o); }
+
+    @Override
     public Iterator<ManaCostShard> iterator() {
         return this.shards.iterator();
     }
-    
+
+    @Override
+    public Object[] toArray() { return this.shards.toArray(); }
+
+    @Override
+    public <T> T[] toArray(T[] ts) { return this.shards.toArray(ts); }
+
+    @Override
+    public boolean add(ManaCostShard manaCostShard) { return this.shards.add(manaCostShard); }
+
+    @Override
+    public boolean remove(Object o) { return this.shards.remove(o); }
+
+    @Override
+    public boolean containsAll(Collection<?> collection) { return this.shards.containsAll(collection); }
+
+    @Override
+    public boolean addAll(Collection<? extends ManaCostShard> collection) { return this.shards.addAll(collection); }
+
+    @Override
+    public boolean removeAll(Collection<?> collection) { return this.shards.removeAll(collection); }
+
+    @Override
+    public boolean retainAll(Collection<?> collection) { return this.shards.retainAll(collection); }
+
+    @Override
+    public void clear() { this.shards.clear(); }
+
     public int getGlyphCount() { // counts all colored shards or 1 for {0} costs 
         int width = shards.size();
         if (genericCost > 0 || (genericCost == 0 && width == 0)) {
