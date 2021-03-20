@@ -18,7 +18,7 @@
 package forge.view.arcane.util;
 
 import javax.imageio.ImageIO;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
