@@ -1,0 +1,7 @@
+Name:Horde Zombie Giant (5/5)
+ManaCost:no cost
+Types:Creature Horde Zombie Giant
+Colors:black
+PT:5/5
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

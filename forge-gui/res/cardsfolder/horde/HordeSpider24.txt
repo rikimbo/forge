@@ -1,0 +1,8 @@
+Name:Horde Spider (2/4)
+ManaCost:no cost
+Types:Creature Horde Spider
+Colors:black
+PT:2/4
+K:Reach
+K:A deck can have any number of cards named CARDNAME.
+Oracle:Reach

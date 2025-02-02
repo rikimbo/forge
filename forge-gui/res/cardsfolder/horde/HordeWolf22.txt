@@ -1,0 +1,7 @@
+Name:Horde Wolf (2/2)
+ManaCost:no cost
+PT:2/2
+Colors:green
+Types:Creature Horde Wolf
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

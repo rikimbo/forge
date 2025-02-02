@@ -1,0 +1,7 @@
+Name:Horde Zombie (2/2)
+ManaCost:no cost
+Types:Creature Horde Zombie
+Colors:black
+PT:2/2
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

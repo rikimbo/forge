@@ -1,0 +1,12 @@
+Name:Horde Magic Survivor Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+0
+
+# Normally play Horde Magic with a shared life total and turns, but since opponents must be separate in Forge,
+# this maakes the Horde attacks more "fair" by alwyays attacking the player with most life.
+S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.OppCtrl | Target$ You | CheckSVar$ X | SVarCompare$ LTY | References$ X,Y | Description$ Creatures your opponents control can't attack you unless you have the highest life total among your team.
+SVar:X:Count$YourLifeTotal
+SVar:Y:PlayerCountYourTeam$HighestLifeTotal
+
+Oracle: Can you survive the Horde?

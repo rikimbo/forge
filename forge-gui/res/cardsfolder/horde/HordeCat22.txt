@@ -1,0 +1,7 @@
+Name:Horde Cat (2/2)
+ManaCost:no cost
+Types:Creature Horde Cat
+Colors:white
+PT:2/2
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

@@ -1,0 +1,8 @@
+Name:Horde Drake (2/2)
+ManaCost:no cost
+Types:Creature Horde Drake
+Colors:blue
+PT:2/2
+K:Flying
+K:A deck can have any number of cards named CARDNAME.
+Oracle:Flying

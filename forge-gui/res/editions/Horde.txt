@@ -1,0 +1,30 @@
+[metadata]
+Code=HORDE
+Alias=HORDE
+Date=2020-01-01
+Name=Horde Magic
+Type=Other
+
+[cards]
+1 S Horde Magic Avatar
+2 S Horde Magic Avatar (Dice)
+3 S Horde Magic Survivor Avatar
+4 S Horde Zombie (2/2)
+5 S Horde Zombie Giant (5/5)
+6 S Horde Sliver (1/1)
+7 S Horde Cat (2/2)
+8 S Horde Drake (2/2)
+9 S Horde Bird (1/1)
+10 S Horde Bird (3/4)
+11 S Horde Dragon (5/5)
+12 S Horde Bear (2/2)
+13 S Horde Wolf (2/2)
+14 S Horde Assassin (1/1)
+15 S Horde Boar (3/3)
+16 S Horde Rat (1/1)
+17 S Horde Hellion (4/4)
+18 S Horde Fish (3/3)
+19 S Horde Ox (2/4)
+20 S Horde Spider (2/4)
+21 S Horde Elemental (X/X)
+22 S Horde Lizard (8/8)
