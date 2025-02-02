@@ -1,0 +1,7 @@
+Name:Horde Ox (2/4)
+ManaCost:no cost
+PT:2/4
+Colors:white
+Types:Creature Horde Ox
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

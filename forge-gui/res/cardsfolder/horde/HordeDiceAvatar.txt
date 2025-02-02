@@ -1,0 +1,75 @@
+Name:Horde Magic Avatar (Dice)
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:-7/-20
+
+# GAME START EVENTS
+
+# Survivors gain extra life
+T:Mode$ NewGame | Execute$ SurvivorSetLife | TriggerDescription$ When the game starts each survivor's life total becomes 40.
+SVar:SurvivorSetLife:DB$ SetLife | Defined$ Player.Opponent | LifeAmount$ 40
+
+# Setup turns - the Horde skips its first two turns
+T:Mode$ NewGame | Execute$ HordeSkipTurns | TriggerDescription$ When the game begins, the Horde skips its next two turns.
+SVar:HordeSkipTurns:DB$ SkipTurn | NumTurns$ 2 | Defined$ You
+
+# Setup turns - the Horde cannot go first
+T:Mode$ Phase | Phase$ Upkeep |  EffectZone$ Command | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ NumTurns | SVarCompare$ EQ1 | Execute$ HordeEndTurn | TriggerDescription$ If the Horde goes first, end the turn.
+SVar:NumTurns:Count$TotalTurns
+SVar:HordeEndTurn:DB$ EndTurn
+
+# HORDE TURN
+# Upkeep event
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ NumTurns | SVarCompare$ GE2 | Execute$ TrigHordeDiceRoll | EffectZone$ Command | TriggerDescription$ Roll a D6, then reveal that many cards from the top of the Horde's library. The Horde puts all the revealed token cards onto the battlefield and casts the other revealed cards.
+SVar:TrigHordeDiceRoll:DB$ RollDice | ResultSVar$ DiceRollResult | SubAbility$ HordeCascade
+SVar:HordeCascade:DB$ Dig | Defined$ You | DigNum$ DiceRollResult | ChangeNum$ All | CangeValid$ Card.nonHorde | DestinationZone$ Exile | DestinationZone2$ Exile | ImprintRevealed$ True | RememberChanged$ True | SubAbility$ HordeCascadeCast
+SVar:HordeCascadeCast:DB$ Play | ValidZone$ Exile | Valid$ Card.IsRemembered+nonHorde | Amount$ All | WithoutManaCost$ True | SubAbility$ HordeCascadeCreateToken
+SVar:HordeCascadeCreateToken:DB$ CopyPermanent | Defined$ ValidAll Card.IsImprinted+Horde | SubAbility$ HordeCascadeCleanup
+SVar:HordeCascadeCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:NumOpponents:PlayerCountOpponents$Amount
+SVar:TwiceNumPlayers:PlayerCountPlayers$Amount/Twice
+
+# HORDE RULES
+# Lands the Horde controls have Vanishing 2 (why not?)
+S:Mode$ Continuous | EffectZone$ Command,Exile,Graveyard | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddKeyword$ Vanishing:2 | HiddenDescription$ Lands the Horde controls have Vanishing:2.
+
+# Horde can't draw cards
+S:Mode$ CantDraw | ValidPlayer$ You | EffectZone$ Command | Description$ The Horde can't draw cards.
+
+# Horde can play cards from hand for free
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | EffectZone$ Command | Description$ The Horde may cast spells from its hand without paying their mana costs.
+
+# Creatures the Horde controls have Haste
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures the Horde controls have haste.
+
+# Creatures the Horde controls attack each combat if able
+S:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.YouCtrl | Description$ Creatures the Horde controls attack each combat if able.
+
+# Creatures the Horde controls can't block
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures the Horde controls can't block.
+
+# Horde mills when it loses life
+T:Mode$ LifeLost | EffectZone$ Command | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ Whenever the Horde loses life, it puts that many cards from the top of its library into its graveyard. (Damage causes loss of life.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ X
+SVar:X:TriggerCount$LifeAmount
+
+# Exile Horde "tokens" if they hit the graveyard
+R:Event$ Moved | ValidCard$ Card.Horde | Origin$ Library | Destination$ Graveyard | ReplaceWith$ HordeLibraryToExile | Description$ If a Horde token would be put into your graveyard from anywhere, exile it instead.
+SVar:HordeLibraryToExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Library | Destination$ Exile
+
+# Special rule: Horde "tokens" are Lands in addition to their other types while in the library
+# (prevent effects that reveal cards until a Land is revealed from milling the whole horde library)
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Horde.YouCtrl | AffectedZone$ Library | AddType$ Land | Description$ Tokens in the Horde's library are Lands in addition to their other types.
+
+# WIN CONDITION
+# Survivers win if they the Horde has no cards in Library and no creatures on the battlefield.
+# Can't win otherwise.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | CheckSVar$ W | SVarCompare$ GE1 | AddKeyword$ You can't win the game. | Description$ Survivors can't win the game as long as the Horde controls at least one creature and has at least one card in its library.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ You | CheckSVar$ W | SVarCompare$ GE1 | AddKeyword$ You can't lose the game. | Description$ The Horde can't lose the game as long as it controls at least one creature and has at least one card in its library.
+T:Mode$ Phase | Phase$ End of Turn |  EffectZone$ Command | ValidPlayer$ Opponent | TriggerZones$ Command | CheckSVar$ W | SVarCompare$ EQ0 | Execute$ TrigYouHaveSurvived | TriggerDescription$ At the end of your turn, if the Horde controls no creatures and has no cards in its library, you have surived the game.
+SVar:TrigYouHaveSurvived:DB$ WinsGame | Defined$ Opponent
+SVar:Y:Count$ValidLibrary Card.YouOwn+inZoneLibrary
+SVar:Z:Count$Valid Creature.YouCtrl
+SVar:W:SVar$Y/Plus.Z
+
+Oracle:Hand -7, Life +80\n If the Horde controls no creatures and has no cards in its library, you will surive the game.\nCan you survive?

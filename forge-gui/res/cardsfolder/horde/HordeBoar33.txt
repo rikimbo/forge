@@ -1,0 +1,7 @@
+Name:Horde Boar (3/3)
+Colors:green
+ManaCost:no cost
+PT:3/3
+Types:Creature Horde Boar
+K:A deck can have any number of cards named CARDNAME.
+Oracle:

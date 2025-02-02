@@ -1,0 +1,10 @@
+Name:Horde Assassin (1/1)
+ManaCost:no cost
+Types:Creature Horde Assassin
+Colors:black
+PT:1/1
+K:Deathtouch
+K:A deck can have any number of cards named CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Planeswalker | TriggerZones$ Battlefield | Execute$ TrigDestroyPW | TriggerDescription$ Whenever this creature deals damage to a planeswalker, destroy that planeswalker.
+SVar:TrigDestroyPW:DB$ Destroy | Defined$ TriggeredTarget
+Oracle:Deathtouch\nWhenever this creature deals damage to a planeswalker, destroy that planeswalker.

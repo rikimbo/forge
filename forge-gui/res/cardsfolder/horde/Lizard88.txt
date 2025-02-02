@@ -1,0 +1,6 @@
+Name:Horde Lizard (8/8)
+ManaCost:no cost
+Types:Creature Horde Lizard
+Colors:red
+PT:8/8
+Oracle:

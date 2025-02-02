@@ -1,0 +1,8 @@
+Name:Horde Dragon (5/5)
+ManaCost:no cost
+Types:Creature Horde Dragon
+Colors:red
+K:Flying
+K:A deck can have any number of cards named CARDNAME.
+PT:5/5
+Oracle:Flying

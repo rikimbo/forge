@@ -1,0 +1,7 @@
+Name:Horde Hellion (4/4)
+ManaCost:no cost
+Types:Creature Horde Hellion
+Colors:red
+PT:4/4
+K:A deck can have any number of cards named CARDNAME.
+Oracle:
