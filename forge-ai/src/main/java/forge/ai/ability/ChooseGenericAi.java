@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
@@ -14,6 +15,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.List;
@@ -276,6 +278,19 @@ public class ChooseGenericAi extends SpellAbilityAi {
             // TODO: implement a better way to check for possible benefits in each case. If made generic, replace
             // fixed spells.get(N) with a way to detect which SA creates which token
             return ComputerUtil.aiLifeInDanger(player, false, 0) ? spells.get(0) : spells.get(1);
+        } else if ("BaneLordOfDarkness".equals(logic)) {
+            SpellAbility draw = spells.get(0), cheat = spells.get(1);
+            int cardsInHand = sa.getActivatingPlayer().getCardsIn(ZoneType.Hand).size();
+            int toughness = ((Card)sa.getTriggeringObject(AbilityKey.Card)).getCurrentToughness();
+
+            // Try to pick based on likelihood that a threatening creature will be cheated.
+            if (MyRandom.percentTrue(cardsInHand * toughness * 2)) {
+                // Many cards in hand or high toughness creature died. Let them draw.
+                return draw;
+            } else {
+                // Few cards in hand or low toughness creature died. Let them cheat.
+                return cheat;
+            }
         }
         return spells.get(0);   // return first choice if no logic found
     }
