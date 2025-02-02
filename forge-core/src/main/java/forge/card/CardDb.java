@@ -503,13 +503,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private static PaperCard getFirstNonSpeicalWithImage(final Collection<PaperCard> cards) {
+    private PaperCard getFirstNonSpeicalWithImage(final Collection<PaperCard> cards) {
         //NOTE: this is written this way to avoid checking final card in list
         final Iterator<PaperCard> iterator = cards.iterator();
         PaperCard pc = iterator.next();
+        CardEdition edition;
         while (iterator.hasNext()) {
             if (pc.hasImage() && !pc.getRarity().equals(CardRarity.Special)) {
-                return pc;
+                if (pc.getArtIndex() == 1) {
+                    try {
+                        edition = editions.get(pc.getEdition());
+                        if (edition.getType() != Type.PROMO && edition.getType() != Type.COLLECTOR_EDITION && !"DBL".equals(edition.getCode())) {
+                            return pc;
+                        }
+                    } catch (Exception ex) {
+                        // swallow the exception, we just won't consider this card
+                    }
+                }
             }
             pc = iterator.next();
         }
