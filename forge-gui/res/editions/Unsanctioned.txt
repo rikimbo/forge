@@ -4,7 +4,6 @@ Code2=UND
 Date=2020-02-29
 Name=Unsanctioned
 Type=Funny
-Border=Silver
 ScryfallCode=UND
 
 [cards]
