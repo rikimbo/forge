@@ -1569,6 +1569,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if ("WinterCynicalOpportunist".equals(logic)) {
+                return SpecialCardAi.WinterCynicalOpportunist.considerCardFromList(fetchList);
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {

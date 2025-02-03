@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.ai.ability.FightAi;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -52,7 +53,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Special logic for individual cards
@@ -1787,6 +1791,88 @@ public class SpecialCardAi {
             }
             sa.setXManaCostPaid(x);
             return true;
+        }
+    }
+
+    // Winter, Cynical Opportunist
+    public static class WinterCynicalOpportunist {
+        // Cards are chosen one by one, so need to remember what was picked so far
+        private static final CardCollection chosenCards = new CardCollection();
+
+        public static Card considerCardFromList(final CardCollection fetchList)
+        {
+            Card choice = null;
+
+            if (chosenCards.isEmpty()) {
+                // First card, this will be the target we want to reanimate
+                choice = ComputerUtilCard.getBestAI(fetchList.filter(CardPredicates.PERMANENTS));
+            } else {
+                // See what types we have so far, and what other types are available
+                EnumSet<CardType.CoreType> typesHave = EnumSet.noneOf(CardType.CoreType.class);
+                EnumSet<CardType.CoreType> typesNotHave = EnumSet.allOf(CardType.CoreType.class);
+                for (Card card : chosenCards) {
+                    card.getType().getCoreTypes().forEach(type->{
+                        typesHave.add(type);
+                        typesNotHave.remove(type);
+                    });
+                }
+
+                final int typesMissing = 4 - typesHave.size();
+                if (typesMissing > 0) {
+                    // Categorize our options by how many new types they provide
+                    final Map<Integer, CardCollection> cardsByNumberOfTypes = new HashMap<Integer, CardCollection>();
+                    for (Card card : fetchList) {
+                        int matchingTypes = 0;
+
+                        for (final CardType.CoreType type : typesNotHave) {
+                            if (card.getType().hasType(type)) {
+                                matchingTypes++;
+                            }
+                        }
+
+                        if (matchingTypes > 0) {
+                            if (cardsByNumberOfTypes.get(matchingTypes) == null) {
+                                cardsByNumberOfTypes.put(matchingTypes, new CardCollection(card));
+                            } else {
+                                cardsByNumberOfTypes.get(matchingTypes).add(card);
+                            }
+                        }
+                    }
+
+                    // Start by trying to find exact count of types missing
+                    if (cardsByNumberOfTypes.get(typesMissing) != null) {
+                        choice = ComputerUtilCard.getWorstAI(cardsByNumberOfTypes.get(typesMissing));
+                    } else {
+                        // Next, look at cards with more types than we need
+                        for (int i = typesMissing + 1; i <= typesNotHave.size(); i++) {
+                            if (cardsByNumberOfTypes.get(i) != null) {
+                                choice = ComputerUtilCard.getWorstAI(cardsByNumberOfTypes.get(i));
+                                break;
+                            }
+                        }
+
+                        // Finally, look at cards with fewer types than we need
+                        for (int i = typesMissing - 1; i > 0; i--) {
+                            if (cardsByNumberOfTypes.get(i) != null) {
+                                choice = ComputerUtilCard.getWorstAI(cardsByNumberOfTypes.get(i));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (choice != null) {
+                // Remember this card since we're asked to choose individually
+                chosenCards.add(choice);
+            }
+
+            if (choice == null || fetchList.size() == 1) {
+                // We picked nothing or we're on the last card, so reset what we remember
+                chosenCards.clear();
+            }
+
+            return choice;
         }
     }
 
