@@ -72,10 +72,33 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
 
+        // Cards that sacrifice themselves to draw cards
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
-            // Canopy lands and other cards that sacrifice themselves to draw cards
-            return ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5); // TODO: make this configurable in the AI profile
+            // If no cards to play, always draw to get more
+            if(ai.getCardsIn(ZoneType.Hand).isEmpty() && !ai.getGame().getRules().hasCommander() || ai.getCardsIn(ZoneType.Command).isEmpty()) {
+                return true;
+            }
+
+            // Canopy lands and mana rocks
+            if(sa.getHostCard().isLand() || sa.getHostCard().isArtifact() && !sa.getHostCard().getManaAbilities().isEmpty()) {
+                // Keep a minimum of mana available, so start most expensive at non-zero
+                // TODO: make this configurable in the AI profile
+                int mostExpensiveCost = 4;
+
+                // Make sure we can play our most expensive card with lands
+                for (Card card : ai.getCardsIn(ZoneType.Hand)) {
+                    mostExpensiveCost = Math.max(card.getCMC(), mostExpensiveCost);
+                }
+
+                // If we are playing Commander, assume we'll need to cast our Commander again
+                for (Card card : ai.getCommanders()) {
+                    mostExpensiveCost = Math.max(card.getCMC() + 2 * ai.getCommanderCast(card), mostExpensiveCost);
+                }
+
+                return ai.getLandsInPlay().size() > mostExpensiveCost;
+            }
+
+            return false;
         }
 
         return true;
