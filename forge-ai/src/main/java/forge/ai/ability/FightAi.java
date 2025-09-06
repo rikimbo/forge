@@ -113,7 +113,7 @@ public class FightAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
         if ("Never".equals(sa.getParam("AILogic"))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return checkApiLogic(aiPlayer, sa);
