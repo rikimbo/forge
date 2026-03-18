@@ -223,12 +223,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         
         if( this.card.getState(false).getType() != null )
         {
-            for(String type : this.card.getState(false).getType()){
-                if(type.equalsIgnoreCase("planeswalker"))
-                    isWalker = true;
-                if(type.equalsIgnoreCase("artifact"))
-                    isArtifact = true;
-            }
+            isWalker = this.card.getCurrentState().isPlaneswalker();
+            isArtifact = this.card.getCurrentState().isArtifact();
         }
         
         if(isWalker){
@@ -618,11 +614,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private void displayPTOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
             boolean onBattlefield = this.card.getZone() != null && ZoneType.Battlefield.equals(this.card.getZone());
-            boolean isWalker = false;
-            for(String type : this.card.getState(false).getType()){
-                if(type.equalsIgnoreCase("planeswalker"))
-                    isWalker = true;
-            }
+            boolean isWalker = this.card.getCurrentState().isPlaneswalker();
         
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
